@@ -49,9 +49,18 @@ public class Logout extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        processRequest(request, response);
+    	UserService userService = UserServiceFactory.getUserService();
+
+        String thisUrl = req.getRequestURI();
+
+        resp.setContentType("text/html");
+          resp.getWriter().println("Good Bye"
+        		
+              + "!  You can <a href=\"ad5807\">sign out</a>.</p>");
+          userService.createLogoutURL(thisUrl);
+        
     }
 
     /**
@@ -66,13 +75,7 @@ public class Logout extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-    	UserService userService = UserServiceFactory.getUserService();
-
-        String thisUrl = req.getRequestURI();
-
-        resp.setContentType("text/html");
-          resp.getWriter().println("Good Bye"
-              + "!  You can <a href=\"logout\">sign out</a>.</p>");
+    	
     
     }
 
