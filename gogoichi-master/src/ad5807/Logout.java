@@ -56,10 +56,17 @@ public class Logout extends HttpServlet {
         String thisUrl = req.getRequestURI();
 
         resp.setContentType("text/html");
-          resp.getWriter().println("Good Bye"
-        		
-              + "!  You can <a href=\"ad5807\">sign out</a>.</p>");
-          userService.createLogoutURL(thisUrl);
+        
+        if (req.getUserPrincipal() != null) {
+            resp.getWriter().println("<p>Hello, "
+                    + req.getUserPrincipal().getName()
+                    + "!  You can <a href=\""
+                    + userService.createLogoutURL(thisUrl)
+                    + "\">sign out</a>.</p>");
+          } else {
+        	  resp.sendRedirect("/top.html");
+          }
+          
         
     }
 
